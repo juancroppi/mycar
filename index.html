@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ES-es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Marcas y Modelos</title>
+    <link rel="stylesheet" href="/static/content/styles.css">
+    <link rel="icon" href="/static/content/img/favicon.ico" type="image/x-icon">
+</head>
+<body class="body">
+    <nav class="navbar">
+        <div class="logo">
+          <img src="/static/content/img/car.png" alt="Logo">
+        </div>
+        <div class="search-bar">
+          <input type="text" placeholder="Buscar...">
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="sidebar">
+          <h2 class="red-title">Filtros</h2>
+          <div class="filter">
+            <h3>Marca</h3>
+            <select id="marcasSelect">
+                <option value="">Cualquiera...</option>
+            </select>
+          </div>
+          <div class="filter">
+            <h3>Precio</h3>
+            <div id="precio" class="precio">
+              <div class="inputWrapper">
+                  <span class="precioSymbol">$</span>
+                  <input id="precioDesde" class="precioInput" placeholder="Desde..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+              </div>
+              <hr class="precioSeparator">
+              <div class="inputWrapper">
+                  <span class="precioSymbol">$</span>
+                  <input id="precioHasta" class="precioInput" placeholder="Hasta..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+              </div>
+          </div>
+          <div class="button-container">
+            <button onclick="listarMarcasFiltradas()" class="button-listar">Buscar modelos</button>
+          </div>
+        </div>
+      </div>
+        <div class="main-content">
+          <h2 class="red-title">Autos Disponibles</h2>
+          <div id="loadingIndicator" style="display: none;" class="centered">
+            <div class="spinner"></div>
+            <p>Buscando modelos...</p>
+          </div>
+          <div id="cars" class="cards">
+          </div>
+        </div>
+      </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            cargarMarcas()
+            cargarAutos(0, 0, 0)
+        });
+
+        function cargarAutos(id_marca, precioDesde, precioHasta) {
+          document.getElementById('cars').innerHTML = "";
+
+          const loadingIndicator = document.getElementById('loadingIndicator');
+          loadingIndicator.style.display = 'flex';
+
+          fetch(`/obtenerModelosPorMarca/${id_marca}?precioDesde=${precioDesde}&precioHasta=${precioHasta}`)
+            .then(response => response.json())
+            .then(data => {
+                  loadingIndicator.style.display = 'none';
+
+                  const carsListed = document.getElementById('cars');
+                  data.forEach(modelo => {
+                      const card = document.createElement('div');
+                      card.classList.add('card');
+
+                      const img = document.createElement('img');
+                      img.src = `/static/content/img/${modelo.marca.nombre}/${modelo.nombre.toLowerCase()}.png`;
+                      img.alt = "Auto";
+                      img.classList = "imagen_car";
+
+                      const containerText = document.createElement('div');
+                      containerText.classList = 'container_text';
+                      const modelName = document.createElement('p');
+                      const modelPrice = document.createElement('p');
+                      modelPrice.classList = 'precio';
+                      modelName.textContent = modelo.marca.nombre + " " + modelo.nombre;
+                      modelPrice.textContent = "$" + modelo.precio;
+                      modelPrice.style = 'right: 0';
+                      card.appendChild(img);
+                      containerText.appendChild(modelName);
+                      containerText.appendChild(modelPrice);
+                      card.appendChild(containerText)
+
+                      carsListed.appendChild(card);
+                });
+            });
+        }
+
+        // Función para cargar las marcas en el select
+        function cargarMarcas() {
+            fetch('/obtenerMarcas') // Ruta de la API para obtener todas las marcas
+                .then(response => response.json())
+                .then(data => {
+                    const marcasSelect = document.getElementById('marcasSelect');
+                    marcasSelect.innerHTML = '<option value="0">Cualquiera...</option>';
+                    data.forEach(marca => {
+                        const option = document.createElement('option');
+                        option.text = marca.nombre;
+                        option.value = marca.id_marca;
+                        marcasSelect.appendChild(option);
+                    });
+                });
+        }
+
+        function listarMarcasFiltradas() {
+            const marcaSeleccionada = document.getElementById('marcasSelect').value;
+            const precioDesdeInput = document.getElementById('precioDesde');
+            const precioDesde = precioDesdeInput.value === "" ? 0 : parseFloat(precioDesdeInput.value);
+            const precioHastaInput = document.getElementById('precioHasta');
+            const precioHasta = precioHastaInput.value === "" ? 0 : parseFloat(precioHastaInput.value);
+            if(precioDesde > precioHasta) {
+              alert('El precio desde no puede ser mayor al precio hasta.');
+              return;
+            }
+            if (marcaSeleccionada) {
+                cargarAutos(marcaSeleccionada, precioDesde, precioHasta)
+            } else {
+                cargarAutos()
+            }
+        };
+    </script>
+</body>
+</html>

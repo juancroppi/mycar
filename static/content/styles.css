@@ -1,0 +1,210 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    height: 100vh;
+    background-color: #2e2e2e;
+    color:#fff;
+    overflow-y: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+}
+
+.sidebar {
+    width: 300px;
+    padding: 20px;;
+    height: 100%;
+    margin-right: 20px;
+    background-color: #2e2e2e;
+    background: linear-gradient(to top, #141414,#2e2e2e);
+}
+
+.filter {
+    margin-bottom: 20px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    position: relative;
+}
+  
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    height: 75%;
+    overflow-y: scroll;
+    padding-left: 6px;
+    padding-right: 12px;
+    padding-bottom: 12px;
+}
+
+.card {
+    border-radius: 15px;
+    border: 1.5px solid #b30000;
+    box-shadow: 0 4px 6px 2px #b3000070, 0 2px 4px 0 #b30000 !important;
+    padding: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    max-height: 200px;
+    position: relative;
+}
+.card:hover {
+    background-color: #00000076;
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    max-height: 170px;
+    margin: 0 auto;
+    margin-bottom: 40px;
+    margin-top: auto;
+}
+
+.card p {
+    margin-top: 10px;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.button-container {
+    margin-top: 50px;
+    height: 30px;
+}
+
+.button-listar {
+    height: 38px;
+    font-size: 16px;
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    background-color: #ff0000;
+    color: #fff;
+    border: 1px solid #b30000;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #b30000;
+}
+
+.red-title {
+    color: #950000;
+    text-shadow: 1px 1px 2px #000000;
+}
+
+.precio {
+    color: rgb(255, 54, 54);
+    text-align: right;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.container_text {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 2%;
+    height: 32px;
+    left: 10px;
+    right: 10px;
+}
+
+/* ========= NAVBAR ========= */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #2e2e2e;
+    background: linear-gradient(to bottom, #6b0000,#2e2e2e);
+    color: #fff;
+  }
+  
+  .logo img {
+    max-width: 50px;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar input[type="text"] {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    min-width: 300px;
+  }
+
+
+  .precio {
+    display: flex;
+    align-items: center; /* Centrar verticalmente */
+}
+
+.inputWrapper {
+    position: relative;
+}
+
+/* ======== Filtro Precios ======== */
+
+.precioSymbol {
+    position: absolute;
+    left: 5px;
+    top: 50%; 
+    transform: translateY(-50%);
+}
+
+.precioInput {
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
+    padding-left: 20px; /* Espacio para el símbolo */
+}
+
+.precioSeparator {
+    width: 100%;
+    height: 1px;
+    background-color: white; /* Fondo blanco */
+    margin: 0 10px; /* Espacio alrededor del separador */
+}
+  /* ========= Pantalla de carga ========= */
+  .centered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-left-color: #8e8e8e;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px; /* Espacio entre el spinner y el texto "Cargando..." */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
