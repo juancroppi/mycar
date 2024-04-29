@@ -8,54 +8,51 @@
     <link rel="icon" href="/static/content/img/favicon.ico" type="image/x-icon">
 </head>
 <body class="body">
-    <nav class="navbar">
-        <div class="logo">
-          <img src="/static/content/img/car.png" alt="Logo">
-        </div>
-        <div class="search-bar">
-          <input type="text" placeholder="Buscar...">
-        </div>
-    </nav>
+  <nav class="navbar">
+      <div class="logo">
+        <img src="/static/content/img/car.png" alt="Logo">
+      </div>
+  </nav>
 
     <div class="container">
-        <div class="sidebar">
-          <h2 class="red-title">Filtros</h2>
-          <div class="filter">
-            <h3>Marca</h3>
-            <select id="marcasSelect">
-                <option value="">Cualquiera...</option>
-            </select>
-          </div>
-          <div class="filter">
-            <h3>Precio</h3>
-            <div id="precio" class="precio">
-              <div class="inputWrapper">
-                  <span class="precioSymbol">$</span>
-                  <input id="precioDesde" class="precioInput" placeholder="Desde..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-              </div>
-              <hr class="precioSeparator">
-              <div class="inputWrapper">
-                  <span class="precioSymbol">$</span>
-                  <input id="precioHasta" class="precioInput" placeholder="Hasta..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-              </div>
-          </div>
-          <div class="button-container">
-            <button onclick="listarMarcasFiltradas()" class="button-listar">Buscar modelos</button>
+      <div class="sidebar">
+        <h2 class="red-title title-filtros">Filtros</h2>
+        <div class="filter">
+          <h3>Marca</h3>
+          <select id="marcasSelect">
+              <option value="">Cualquiera...</option>
+          </select>
+        </div>
+        <div class="filter">
+          <h3>Precio</h3>
+          <div id="precio" class="precio">
+            <div class="inputWrapper">
+                <span class="precioSymbol">$</span>
+                <input id="precioDesde" class="precioInput" placeholder="Desde..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            </div>
+            <hr class="precioSeparator">
+            <div class="inputWrapper">
+                <span class="precioSymbol">$</span>
+                <input id="precioHasta" class="precioInput" placeholder="Hasta..." oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+            </div>
           </div>
         </div>
-      </div>
-        <div class="main-content">
-          <h2 class="red-title">Autos Disponibles</h2>
-          <div id="loadingIndicator" style="display: none;" class="centered">
-            <div class="spinner"></div>
-            <p>Buscando modelos...</p>
-          </div>
-          <div id="cars" class="cards">
-          </div>
+        <div class="button-container">
+          <button onclick="listarMarcasFiltradas()" class="button-listar search-button"><span>Buscar modelos</span></button>
         </div>
       </div>
+      <div class="main-content">
+        <h2 class="red-title title-filtros">Autos Disponibles</h2>
+        <div id="loadingIndicator" style="display: none;" class="centered">
+          <div class="spinner"></div>
+          <p>Buscando modelos...</p>
+        </div>
+        <div id="cars" class="cards">
+        </div>
+      </div>
+    </div>
 
-    <script>
+  <script>
         document.addEventListener("DOMContentLoaded", function() {
             cargarMarcas()
             cargarAutos(0, 0, 0)
@@ -132,6 +129,6 @@
                 cargarAutos()
             }
         };
-    </script>
+  </script>
 </body>
 </html>
