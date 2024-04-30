@@ -232,6 +232,10 @@ button:hover {
         padding-right: 10px;
         width: 45%;
     }
+    .marca-filter {
+        padding-left: 0px;
+        width: 36%;
+    }
 
     .main-content{
         position: absolute;
@@ -295,8 +299,34 @@ button:hover {
     }
 
     .filter {
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 45%;
+    }
+
+    .marca-filter {
+        padding-left: 0px;
+        width: 36%;
+    }
+  }
+
+  @media screen and (max-width: 410px) { 
+    .main-content {
+        width: 87%;
+    }
+
+    .precioInput {
+        width: 52px;
+    }
+
+    .filter {
         padding-left: 5px;
         padding-right: 5px;
-        width: 45%;
+        width: 50%;
+    }
+
+    .marca-filter {
+        padding-left: 0px;
+        width: 32%;
     }
   }
